@@ -1,0 +1,763 @@
+## Analyze Resource Utilization and Consumption
+Action Groups enable you to configure a list of actions to take when the alert is triggered. An action group ensures the same actions are taken each time an alert is triggered. The action types you can select when defining the group are listed below
+
+* 1- Select Email/SMS/PUSH/Voice -> Provides the ability to send email, SMS, push notifications, or a voice call
+* 2- Logic App, Webhook, IT Service Management Function -> Run a logic App, Deploy a Webhook, Integrate with an IT management service, Run a function app
+* 3- Automation Runbook -> Run an Azure Automation runbook
+
+
+Azure Monitor enables core monitoring for Azure Services by collecting metrics, activity logs, and diagnostic logs. This is very useful for running diagnostics and troubleshooting multiple resources within Azure. The key capabilities of Azure Monitor include.
+* 1- Monitor and Visualize Metrics -> Metrics are numerical values available from Azure resources that help you understand the health and performance of your system. 
+* 2- Query and Analyze Logs -> Activity logs, diagnostic logs, and telemetry are monitoring solutions which can provide useful information through analytic queries. 
+* 3- Setup Alerts and Actions -> Alerts notify you of critical conditions and can take automated corrective actions. Triggers for alerts can be based on metrics or logs.
+
+
+### Azure Monitor Diagnostic Logs :
+Azure Monitor Diagnostic logs are logs provided by the Azure service that give useful data about the operation of Azure resources and services. The logs are constantly updating on real time to provide an accurate assessment of what is going on in the infrastructure.
+
+
+Azure Monitor provides 2 types of diagnostic logs: 
+* 1- Tenant Logs contains activity that occurs at the tenant level but is outside of the Azure Subscription
+* 2- Resource logs contain information produced from Azure Services which deploy resources in Azure
+
+## Create Alert Rules
+Creating an alert is a three step process as shown above
+
+
+1- Define the alert condition including the following elements:
+* Target selection : Storage account
+* Alert criteria : used capacity
+* Alert logic: an action is triggered once the disk space capacity has exceeded a specified size. 
+
+2- Define the alert details including the following elements : 
+* Alert rules name
+* Description
+* Severity : A level ranging from severity 0 to severity 4
+
+3- Defining the action group : 
+* Create an action group to either notify you or your team or take automated actions. Notifications can be delivered by email, text message , or both. Automated actions are performed using webhooks and runbooks. 
+
+## Improvement for Metrics
+* Improved Latency -> New metric alerts can run as frequently as every minute
+* Support for Multi-Dimensional Metrics -> You can set an alert on dimensional metrics to monitor an interesting segment of the metric
+* More Control Over Metric Conditions -> You can define richer alert rules that support monitoring with improved capabilities
+* Combined Monitoring of Multiple Metrics -> You can monitor multiple metrics with a single rule
+* Metrics from Logs -> You can extract some data going into Log Analytics and convert it into Azure Metrics. This can be used for alerts like other metrics.
+
+
+
+Signals are emitted by the target resource and can be of several types. Supported signal types include Azure Metrics, Activity Log, and Application Insights.
+
+## Creating a Baseline for Resources
+A performance baseline is your current average and is used to compare to future performance levels. Once a baseline has been determined you can use Metric Alerts with Dynamics thresholds to monitor your resource performance.
+
+
+Metrics Alerts with Dynamic Thresholds uses machine learning to analyze historic data in order to give suggestions regarding possible service issues.
+
+
+3 Reasons to Use Dynamic Type : 
+1- Scalable Alerting : 
+* Very useful when handing multiple resources across multiple subscriptions. Hundreds of metric series can be created at a time.
+2- Smart Metric Pattern Recognition : 
+* Patterns in the metrics can be identified, causing the alerting to adapt and deviate as necessary.
+3- Intuitive Configuration :
+* Setting up metrics is an easy and user-friendly experience. There's no need for in-depth knowledge.
+
+## Monitoring for Unused Resources with Azure Advisor
+Azure Advisor is a personalized cloud consultant that helps you follow best practices to optimize your Azure deployments. It is also useful tracking under utilized resources. It reviews your resource configuration and usage telemetry to provide advice on how to improve expenses, performance, availability, and security of your Azure resources.
+
+
+The Advisor Cost Recommendations page can assist you in optimizing and shrinking your total Azure spending by identifying idle and underutilized resources 
+
+
+The recommendations are divided into the following 4 categories:
+* 1- Availability -> To ensure and improve the continuity of your business critical application
+* 2- Security -> To detect threats and vulnerabilities that might lead to security breaches
+* 3- Costs -> To optimize and reduce your overall spending
+* 4- Performance -> To improve the speed of your applications
+
+## Monitoring Spending and Reporting on Spending
+In the move from on-premise computing to cloud hosted services, tracking and estimating service usage and related costs are significant concerns. It is important to get an accurate estimate on what new resources will cost to run monthly and project how the billing will look for a given month based on the current spending Azure provides a set of Billing Rest API's that give access to resource consumption and metadata information for Azure subscriptions.
+* 1- Pricing calculator -> Provides estimates in all areas of Azure including compute, networking , storage, web and databases. 
+* 2- Billing Alert Service -> Provides ability to create alerts to send email when you approach spending limits.
+* 3- Cost Analysis -> Supports different kinds of Azure account types and useful for exploring and analyze your organization's costs
+* 4- Customize cost views -> There are 4 built in views, accumulated costs, daily costs, costs by service and cost by resource
+* 5- Download Reports -> You can download information from cost analysis to generate a CSV file
+* 6- Cost Analysis Prerequisites -> Read access to billing accounts department , enrollment accounts, management group, subscriptions or resource group.
+
+## Utilizing Log Search Query Functions
+Log Analytics helps you collect, correlate, search and act on log and performance data generated by operating systems and applications. It gives you real time operational insights using integrated search and custom dashboards to readly analyze millions of records across all your workloads.
+* 1- Log Analytics -> Most of your interaction with Log Analytics will be through the OMS portal. The portal supports constructing queries to analyze collected data, customizing dashboards with graphical views and provides additional functionality and analysis tools.
+* 2- Connected Sources & Data Sources -> Connected sources are the computers and other resources that generate data collected by Log Analytics. Data sources are the different kinds of data collected from each connected source.
+* 3- Query -> Log Analytics provides a query syntax to quickly retrieve and consolidate data in the repository. You can create and save log searches to directly analyze data in the OMS Portal or have log searches run automatically to create an alert if the results of the query indicate a predefined important condition. 
+
+
+
+Workspace : To get started with Log Analytics you need to ass a workspace.
+
+## Viewing Alerts in Logic Analytics/Alert Management
+Alert Management helps you view your Operations Manager and Log Analytics log alerts across your entire environment. This is an effective tool which helps you contains alerts and puts you in a better position to identify the cause of issues within your system.
+
+## Metrics
+Metrics are lightweight numerical values that describe something about a resource over a given time period.
+
+
+
+A number of metrics are provided by the Azure platform and are available by default similar to log data. Additional metrics are also available from other sources, like application metrics via the Application Insights instrumentation, or OS-specific metrics via the diagnostics VM extension
+
+### Example of metrics :
+* Average CPU Utilization (as a percentage over time)
+* Network throughput (kilobytes per second)
+
+### Important information about metrics: 
+* Metrics are collected at a frequency of one-minute by default and stored for 93 days
+* There are many metrics available by default with various Azure resources
+* Some additional metrics require further configuration (VM Diagnostics Extension..) before they are available
+* Metrics can be viewed through Azure Monitor and also within the resource tab itself]
+
+## Logs - Overview
+Logs are larger sets of textual data , containing detailed descriptions and information about a specific resource, application or activity. Data is typically collected sporadically.
+
+### Examples of Logs: 
+* Activity logs from Azure resources 
+* Detailed diagnostics collected from Windows and Linux VM guest operating systems and applications 
+* Resource level diagnostic logs provided through the Azure platform
+* Custom log data
+
+## Logs - Diagnostic Logs
+Diagnostic logs is typically rich and frequent data that details the operation of a given service or application. Exactly what they look like differs on a case by case basis.
+
+
+
+There are 3 types of diagnostic logs:
+* Tenant logs -> Logs from outside of an Azure subscription (AD logs..)
+* Resource logs -> Logs enabled by resources deployed within an Azure subscriptions (storage accounts)
+* OS-level logs -> Logs collected by an agent running inside a compute resource (virtual machine)
+
+
+Important information about diagnostic logs:Azure Monitor is able to provide diagnostic logs for a number of resources with minimal configuration.
+1. Logging for theses resources can be enabled within Azure Monitor , in Diagnostic Settings.
+2. These Logs are collected by the Azure platform itself.
+
+
+OS-level logs require and additional agent and configuration , in order to capture the log data
+1. For virtual machines , this agent is installed using a VM extension
+
+
+What happens to the logs ?
+
+
+Azure Monitor uses diagnostic settings to configure 3 possibles destinations:
+1. A Storage account, for archival
+2. Log Analytics, for search and analytics
+3. Event Hubs, to be integrated with other solutions
+
+
+When using the OS-level Azure Diagnostic Extension, data is stored in a specified storage account
+
+## Logs - Activity Logs
+Activity Logs , previously known as Audit Logs or Operational Logs, provide information about events that have occurred across a subscription. These logs are used to determine "who, what and when" for operations performed on resources within a subscription
+
+### Important information about Activity Logs: 
+* Subscription level log for write operations (PUT, POST, DELETE)
+* Does not include read operations (GET)
+* Does not include operations for resources that use the classic/RDFE model
+
+
+These are a range of sources for Activity Logs:Administrative : Create , update, and/or delete actions performed through Azure ResourceManager
+* Service Health: Service health incidents that have occurred in Azure
+* Resource Health : Resource health events for resources (available, unavailable, degraded, unknown)
+* Alert: A record of any Azure alerts activating Autoscale: Events relating to the operation of any autoscale settings you have defined
+* Security: Alerts generated by Azure Security CenterPolicy: Reserved for future use by Microsoft 
+
+## Alerts - Overview
+Alerts are a feature of Azure Monitor which provide the ability to perform some action in response to something happening
+
+
+In order to configure alerts, we must create an alert rule (including a name and description) which defines an action group to trigger, based on a condition being met for a given resource
+
+### Important information about alerts:
+* Alert conditions can only be based on 2 signal types : metrics or activity logs
+* It is important to understand limits associated with the actions we can perform -> Refer to the Action Groups tab above
+* Triggered alerts are visible within Azure Monitor -> Alerts, where they can be managed
+
+
+* 1. Alert state management allows us to use 3 state alerts: new, acknowledged and closed
+* 2. Alert states are independent of the underlying monitoring condition
+* 3. Historical information about the alert states, and monitor condition are recorded
+
+## Alerts - Action Groups
+Action groups are used within alerts to define what should happens when an alert is triggered. This can include emailing users, calling an Azure Function, and much more.
+
+
+Below is a list of the types of actions that can be performed, as well as the limits per action groups
+
+
+Action groups (limits per action group displayed in parenthesis):
+* Email (up to 1000): Email notifications to an email address
+* SMS (up to 10): SMS notifications to a phone number
+* Push (up to 50??): Push notifications to the Azure app
+* Voice (up to 10): Voice calls to a phone number
+* Azure Function: Call to a Function app
+* LogicApp (up to 10): Call to a Logic app
+* Webhook (up to 10): URI call to a webhook
+* ITSM (up to 10): Call to supported ITSM via an ITSM Connection
+* Automation Runbook (run to 10): Call to a built-in or user Runbook
+
+
+Rate limiting for certain notifications types:Microsoft imposes certain limits to ensure that alerts are manageable. To achieve this, notifications may be suspended if too many are sent to a particular phone number, email address, or device. The rate limit thresholds are : 
+* SMS: no more than 1 SMS every 5 minutes
+* Voice: No more than 1 voice call every 5 minutes
+* Email: No more than 100 emails in an hour
+
+## Log Analytics - Overview
+Log Analytics is a service within Azure Monitor which helps to centralize log management for a variety of Azure services , resources , and other log data.
+
+
+Log Analytics provides the storage and search functionality of logs within Azure Monitor. To send data to Log Analytics, Diagnostic Settings must be configured for a given resource.
+
+
+### Important information about Log Analytics:
+* Log Analytics provides uses a powerful query language, based on the Data Explorer query language
+* All log data collected by Azure Monitor is stored within a Log Analytics workspace:
+* A workspace must be created for log data to be stored within Log Analytic
+* All Log Analytics queries are scoped to the respective workspace by default
+* Workspace data sources can include Azure resources, storage accounts, activity logs, VMs, etc.
+* Historically, Log Analytics was a standalone service, however it is now part of Azure Monitor.
+
+### Important information about Log Analytics data sources:
+* Data Sources can include Azure resources, activity logs, storage accounts logs, and virtual machines
+* Diagnostic Settings are used to configure resources to send data to a Log Analytics workspace
+
+## Log Analytics - Log Search
+Log Analytics queries provide a way to perform powerful analysis of large volumes of log data. Microsoft manages the underlying analysis infrastructure so you do not have to (based on the Data Explorer service)
+
+
+Below are some tips for log queries:
+* Log Analytics data is organized in tables, which can be queried by piping the table through to an operator.
+
+
+The below query show a maximum of 50 results from the SecurityEvent table
+
+
+          SecurityEvent | limit 50
+          
+          
+The below query searches the Azure Activity Log for evidence of Storage Account keys being changed
+
+
+
+          Azure Activity | where OperationName == "Regenerate Storage Account Keys"
+
+Queries can be saved as functions to simplify advanced queries
+
+
+### For example, if the preceding query string is saved as "sakeyregen", then we could re-use it as follows: 
+
+
+          sakeyregen | summarize count (Caller) by Caller
+
+
+This would take the output of the earlier command, and pipe it to the second command.
+
+
+The result of this query is to list and count all distinct users who have regenerated a storage account key.
+
+## Cost Management
+Cost Management is an important part of any Azure Solution Architect's job. These are a number of tools we can utilize to help manage costs: 
+* Costs can be monitored and reported on through the Azure Portal, within the given subscription
+* Tagging resources helps to map costs according to categories we decide (department or application)
+* Azure Advisor provides recommendations which help to optimize spend across Azure
+
+## What is Consumption Optimization ?
+Optimizing consumption , is primarily related to the efficiency design principle with a specific focus on resource utilization
+
+
+Why does this matter ?
+
+
+As a solution architect you must get the balance right
+
+
+
+We can do this by leveraging the information and requirements gathered earlier.
+
+
+What we will Discuss ?
+
+
+There are a number of key influences on the overall cost of a solution. These are follows:
+* Purchasing Options -> How you pay for Azure : Te option you choose can chance the cost of services.
+* Licensing -> Some services require licenses: Some examples include virtual Machines and Azure Active Directory
+* Product Usage -> Features and utilization: What features do you need and how much will be utilized.
+* Design -> The solution architecture: How many resources are used , what services , etc...
+
+
+### Purchasing options : 
+* PAYG -> Pay as you go is the standard purchase option for Azure, where you only pay for the services you use. This has standard pricing.
+* EA -> An enterprise Agreement requires a committed amount you will spend in Azure , paid upfront. Typically used by larger enterprises or those that already have an EA in place for other Microsoft products for services. 
+* Dev/Test -> Access to discounted Azure services, only when used for development and testing. This includes Microsoft software licensing for virtual machines and access to Windows 10
+* CSP -> The Cloud Solution Provider offer is where Microsoft partner sells and bills the Azure services directly to customers. In this scenario, the agreement is with the partner , not with Microsoft.
+* Support -> Microsoft provides a range of support plans which largely differ based on response times and the level of advice provided. 
+
+## Azure Reservations
+What is it ? 
+
+
+Save money by purchasing a long-term service upfront.
+* Services must be prepaid to receive the discount.
+* The discount is a high as 72% depending on length of time.
+* Reservation time varies , but it typically 1 or 3 years
+
+
+
+When would I use it ?This is useful when we're confident , we're going to be using one of the available services long-term What services are available ?As of July 2019, the following services can be reserved.
+* Virtual Machines (instances for 1 or 3 years)
+* Azure SQL Data Warehouse (capacity for 1 or 3 years)
+* Azure Cosmos DB (throughput for 1 or 3 years)
+* SQL Database (vCores for 1 or 3 years )
+* Azure DataBricks (DBUs for 1 or 3 years)
+* App Service (isolated for a 3 year instances)
+* A range of other software/ operating system licenses.
+
+## Licensing in Azure
+There are number of important considerations for licensing products within Azure. These are summarized as follows:
+* Virtual Machine software licensing must be considered: See hybrid considerations below, Note that client access licenses are typically included
+* Marketplace software licensing must be considered
+* A range of per item licensing and subscriptions exist: Azure Active Directory , Enterprise Mobility + Security
+
+
+Considerations for Microsoft Hybrid Licensing
+* Azure Hybrid use benefit can provide up to 40 % savings on Windows Virtual Machines and is available to those with Software Assurance for Windows Server licensing
+* License Mobility (often call BYOL: bring your own license) can be used to license some products in Azure
+
+
+Marketplace LicensingBe Aware that marketplace solutions can come with additional costs or may require you to supply a license. 
+
+## Product pricing
+There are 2 main things which will influences the total cost of the products we use within Azure
+
+
+This is in addition to what has been discussed so far
+1. Consumption -> How much are you using ? Example 730 hours per month, 1GB per day...
+2. Features or SKU -> What features will we need ? G Series virtual machines , VPNGW , etc...
+
+## Optimizing Product Consumption
+How can we optimize the pricing of our products ? 
+
+
+There is NO MAGIC ANSWER. We must leverage knowledge of the products and requirements to make the right choice.
+
+
+Below is an overview of the typical things we must consider.
+* Compute -> Virtual machines: Azure Hybrid Licensing , select the appropriate VM family , scaling and scale sets. Functions: Consider the consumption plan. App Service: Correct App service plan, scaling.
+* Identity -> Pick the appropriate license for the requirements. only license users and services are required.
+* Network -> Select the appropriate SKU for the required network service. Be aware of data traffic flows.
+* Storage -> Leverage the appropriate SKY for the required storage service and be aware of data read, write and retrieval costs (archive tier, disk...)
+
+## Azure Advisor
+Using Azure Advisor , we can get a range of recommendations specific to our environment. There's a fixed list of continually evolving recommendations.
+
+
+What does Azure Advisor do ?
+* Providers recommendations tailored to our environment 
+* Recommends improvements across 4 categories: High Availability, Security, Performance, Cost
+
+
+How does Azure Advisor help to optimize cost ? 
+* Identifies low utilization (CPU, network) virtual machines
+* Identifies unprovisionned ExpressRoute circuits.
+* Recommends Azure Reservations for virtual machines
+* Identifies unassociated public IP addresses
+* Identifies failing Azure Data Factory pipelines
+* Recommends standard snapshots for managed disks
+
+## Azure pricing calculator
+As a solution Architect, the Azure Pricing calculator will be an invaluable tool in your arsenal.
+
+
+What does the Azure Pricing Calculator do ?
+* Allows you to estimate an Azure solution
+* Supports saving and sharing your estimate
+* Supports viewing estimates with various pricing options
+* Provides additional functionality when signed in
+
+## Total Cost of Ownership (TCO) Calculator
+With the TCO Calculator, Microsoft provides a powerful tool for comparing the TCO for operating on premises and using Azure
+
+
+What does the TCO Calculator do ? 
+
+
+Allows us to estimate and compare TCO for: 
+* Operating our on-premises environment
+* Operating the same environment in Azure
+
+
+Considers a range of costs such as:
+* Electricity costs
+* IT labor costs to manage and maintain servers
+* Data center costs
+* Various other costs such as networking and software
+
+## Optimization Solutions
+* Solutions and Services -> Optimizing costs : We look at several tools to help optimize costs within Azure
+* Scenario -> What would you do ? : We walk through a simple scenario and a possible solution
+
+## Azure Cost Management
+Microsoft has continually developed and improved the cost management within Azure
+
+
+Costs can now be managed through the portal
+
+
+What is Azure Cost Management ?
+* Tool to manage (analyze budget , optimize) costs. 
+* An Azure native solution, not multi cloud
+* A replacement for Cloudyn , which is multi-cloud
+* No support for Cloud Solution Provider subscriptions
+
+
+What are the main features of Azure Cost Management ?
+* Computes recommendations from Azure Advisor
+* Azure Reservations recommendations
+* Monetary budgets with alerts
+* General cost reporting breakdown and analysis
+* The ability to export information
+* Support for resource tagging
+
+## Scenario
+The Bob company has a range of infrastructure hosted in their Mexico head office.
+
+
+The on-premises infrastructure is licensed through a Microsoft Enterprise Agreement, with all products covered by software assurance.
+
+
+All servers operate Windows Server 2016 and are hosted as Hyper V virtual machines. The Hyper V hosts are running Server 2016 Datacenter edition
+
+
+The cluster hosts a farm of duplicate servers for an application called BCProcessing
+
+
+BC does not yet have any Azure subscriptions but it does have Visual Studio subscriptions for the developer team
+
+
+They wishes to establish a presence in Azure
+
+
+### The solution must do the following: 
+* Minimize cost wherever possible.
+* Migrate BCProcessing servers to Azure
+* Provide a dedicate development, environment for the development team
+
+
+### Assessment:
+Note the assessment has been simplified compared to the first assessment we performed since this process is now understood.
+
+
+Key technical requirements: Migrate BC Processing to Azure: 
+* These are duplicate Server 2026 servers
+* Licensing is provided by Hyper V hosts
+* Licensing is covered with software assistance
+
+### Key non-technical requirements:
+* Minimize costs
+* Establish a presence in Azure (with new subscriptions) for: Productions servers (BC Processing) and Development and testing
+
+## Solution Summary
+Solution specifications:
+
+
+For production, create a new subscription:
+* Use Azure Hybrid License for TPCProcessing
+* You can also use a virtual machine scale set
+
+
+For development , create a dev/test subscription Note: This is limited example to help demonstrate how certain configuration impact consumption.
+
+## Auditing and Monitoring
+Access this interactive diagram section and the rest , we will discuss the following: 
+* Monitoring -> Monitoring in Azure : The unified monitoring experience within Azure
+* Audit and Compliance -> Auditing and Compliance : Fundamentals of compliance and audit controls in Azure
+* Solutions -> Tools and Techniques : Solutions for monitoring , auditing and compliance
+* Scenario -> The Solution Architecture : How many resources are used , what services ....
+
+## What is Monitoring ?
+As a solution architect we need to design a solution that can be both successfully deployed and maintained long term.
+
+
+The design of our monitoring plays a critical role in the long-term success of our solution.
+
+
+What is Monitoring ? 
+
+
+Monitoring focuses on the understanding and responding to the operations of solutions such as : 
+* Application performance , tracing, and diagnostics 
+* Network performance, connectivity and flow
+* Infrastructure health, performance and diagnostics
+
+## Monitoring in Azure
+When monitoring in Azure, we're aiming to understand and respond to operations and activity across our applications infrastructure and network.
+
+
+Primarily this is covered by the unified Azure Monitor platform
+* Understand : Visualize , analyze, and gain insights into the operation of our solution
+* Respond: Scale the solution based on demand, and send alerts for issues
+* Route: Route information to other solutions (monitoring , helpdesk, etc... or export to storage..)
+
+## What is Audit and Compliance ?
+Our solutions include non technical requirements which might be people , policies, processes , and regulations
+
+
+Auditing generally represents a formal or systematic process for ensuring our solution compiles with such non-technical requirements.
+
+
+Auditing and Compliance: 
+
+
+Includes the assessment of : 
+* Compliance with regulatory and legislative rules (ex: those relating to financial or private health) 
+* Governance of company policies and procedures
+* Reviews of security access (past and present)
+
+
+Azure Featured Regions Be aware that there are featured regions which meet special compliance and security requirements. Azure Government and Azure Australia, for example, have extra protections prebuilt into them 
+
+## Audit and Compliance
+Using a range of Azure solutions , we can verify items such as : 
+
+
+Compliance with a range of standards: 
+* ISO 27001 (global) MeltY(India) KNF (Poland)
+* Government cloud requirements
+
+
+Security assessments and vulnerability testsCompliance with company policies for example :
+* Always using tags for organizing resources
+* Only using allowed locations
+
+
+Audit : Report on and understand adherence to requirements (legal, regulatory, organization)Comply : Enforce the solution adherence to requirements , automatically or through policy. 
+
+## Azure Monitoring Solutions
+* Azure Monitor -> Core monitoring platform : Providing logs , metrics , health, visualization and analytics
+* Application Insights -> Insights for applications : Allows for building advanced tracing in while developing applications
+* Network Insights -> Insights for network resources : Gives better understanding of activity across your network Azure resources
+* Integration -> Integrate and export : Lets you integrate with both Azure and third party tools.
+
+## Azure Monitor
+What is Azure Monitor ? 
+
+
+Azure Monitor is the underlying unified monitoring platform for Azure. It includes multiple tools and capabilities for working with logs , metrics, and traces. 
+
+
+What should we use it ? 
+
+
+This is useful when monitoring Azure resources, and even some resources hosted on-premises or with another cloud provider.
+
+
+### Important information: 
+* Azure Monitor includes a range of functionality, and changes rapidly which can lead to some confusion
+* Various limitations exist for the various sub-services
+
+## Application Insights
+What is Application Insights ? 
+
+
+Application Insights is a powerful application monitoring tool capable of revealing detailed insight about your application.
+
+
+### Important features: 
+* Performance tests: Request failure rates, response times
+* Dependency: Rates/Response/failure with external services
+* Diagnostics: Detailed logs and custom events/metrics
+* Analytics: Application maps, availability, usage,etc.
+* Distributed tracing: Particularly useful for microservices
+
+
+### Important Considerations: You must install Applications Insights to your application:
+* Codeless: Agent-based to Azure resources
+* Code based: Install through code using the SDM
+* Data retention beyond 31 days will cost moneyStoring , rouging, and integrating is possible. 
+
+## Network Insights
+What is Network Insights ?
+
+
+It is a network monitoring and diagnostic tool for Azure resources.
+
+
+### Important Features : 
+* Virtual machines and endpoint connection monitoring
+* Visualizing relationships between virtual network resources
+* Diagnosing routing, and communication issues.
+* Capturing packets to and from a virtual machine 
+
+
+### Important Considerations : 
+* Known as "Network Watcher"
+* Must first be enabled per subscription , per region
+
+## Integration
+How do we integrate with other monitoring solutions ? 
+
+
+Through a variety of Azure Monitor capabilities and other Microsoft or third-party solutions, it is possible to extend the functionality of monitoring within Azure.
+
+
+### Important Azure Services:
+* Azure Monitor -> Provides a range of functionality for storing, routing, or otherwise making monitoring data accessible to other services and solutions.
+* Event Hubs -> Integrate with other services by streaming monitoring and even transforming monitoring data
+* Logic Apps -> Automate processes and workflows for handling monitoring data with other services
+* APIs -> Leverage the various application programming interfaces (APIs) to build custom solutions that integrate with Azure Monitor
+
+## Important Monitoring Scenarios
+* Store / Route -> Control what happens to the monitoring data where will it be stored , for example, and for how long ? Will it be archived or sent elsewhere for further analysis ? 
+* Relates to Azure Monitor, Log Analytics , Log Profiles, Diagnostic Settings.
+* Integrate -> What if we need to integrate with a third-party monitoring tool, or another Microsoft product ?
+* Relates to Integrating and other monitoring tools, Power BI, Event Hubs, and Security Information and Event Management (SIEM)
+* Escalate -> How do we route events for escalation and further handling ?
+* Relates to Alerts , Activity Log, and Log Query Alerts.
+
+## Storing and Routing Log Data
+There are several ways to control how and where monitoring data is routed , be it for archival or analysis
+
+
+Activity Logs
+* Data retained for 90 days by default
+* Can be stored in a storage account by using a log profile (supports up to infinite retention)
+* Can be routed to Azure Monitor Logs (Logs Analytics)
+* Can be streamed to event hubs / ingested by other
+ 
+ 
+
+Diagnostics Logs and Log Settings 
+* Collect in Azure Monitor Logs
+* Stored in storage account (using Diagnostic Settings) : Supporting 1-365 day retention or 0 for infinite
+* Routed to Event Hub / Ingested by other
+* Can be analyzed with Stream Analytics / Power BI
+* Compute resources can use the Diagnostics Extension
+
+
+Insights and Monitoring SolutionsSome insights have different controls, for example: 
+* The Application Insights service includes its own data repository for storing and analyzing telemetry
+* Network Insights features store data in different locations, depending on how you configure things
+* Many Monitoring Solutions store data in Azure Monitor.
+
+## Events and Alerts
+Azure Monitor provides capability to support alerts and actions taking place , in response to a range of eventsAlerts are created through Azure Monitor. We can configure alerts for a range of sources , including: 
+* Compute resources
+* Activity Logs
+* Service Health
+
+
+
+Alert Action Groups support a range of actions , including: 
+* Email /SMS/ Push/ Voice
+* Azure Functions
+* Logic Apps
+* ITSM
+* Automation Runbooks
+
+## Integration with Monitoring Tools
+Extending on our ability to store/route monitoring data, it is possible to them integrate with a variety of other tools
+
+
+The general process for integrating with other solutions is : 
+* Stream to an Event Hub -> ingest with another solution
+* Utilize Action Groups -> ITSM/ Webhooks
+* Integrate with preconfigured resources
+* Custom or thrid-party solutions (such as Monitoring Solutions) or API integration
+
+
+PowerBI can report log query data
+
+
+
+Other third-party solutions can be registered within Azure Active Directory, providing monitoring access
+
+## Organizing Azure Resources
+To better manage, monitor and audit our environment , it helps to start with good organization.
+
+
+The 2 primary ways we can organize resources are as follows:
+
+
+### Azure Resource Hierarchy
+* Azure Subscriptions : High level separation of billing and management , for example , for different departments, business units, or production and non-production 
+* Azure Resource Groups: Workload separation of management and security
+
+### Tagging
+* Serves 3 main purposes: Cost management , Resource management, Automation
+* Is customizable for many purposes
+
+## Azure Policy
+What is Azure Policy ?
+
+
+Azure Policy helps organizations to ensure internal policies and rules are being adhered to. 
+
+
+### Important features: 
+* Policies allow a range of rules to be enforced, for example : Limiting the location of allowed resources, Requiring naming conventions, Requiring resource tagging, Restricting allowed virtual machine images or sizes
+* Policies can result in a range of effects, including: Enforcing a specific behavior, Preventing creation of non-compliant resources, Auditing/reporting an various configuration elements
+* Implementing Azure Policies includes the following: Policy definition -> The condition and effect if matched , Initiatives -> Groupings of policies, Assignments -> The scope of the policy/initiative
+
+## Azure Service Trust Portal
+The Service Trust Portal provide a range of tools and resources to help Azure customers meet their compliance requirements.
+
+
+Extending on the Shared Security/Responsability Model, the portal provides a range of features relevant to both Microsoft and customer compliance.
+
+
+What are the main features of Azure Services Trust Portal ?
+* Compliance offerings include: Certifications specific to global regions and countries, Offerings specific to industries (health, government, finance education, etc...)
+* Reports and compliance resources: Documented regulatory compliance information, Documented audit reports,
+* Compliance Manager: Risk assessment capabilities to assess compliance, Recommended actions and insights for compliance, Simplified compliance tools to and workflows
+
+## Scenario
+The Bob Company has a range of applications and infrastructure currently hosted across Mexico and Tijuana
+
+
+Mexico and Tijuana finance departments each manage their infrastructure expenditure independently. 
+
+
+As BC provide veterinary services , they are required to meet certain obligations. This includes retaining audit logs for 2 years. 
+
+
+One of the core applications of the business is TBCApp , which allows customers to make bookings and purchases online.
+
+
+BCApp is developed using .NET and Visual Studio
+
+
+The BC wishes to establish a presence in Azure. 
+
+
+### The Solution mush achieve the following : 
+* Workloads from both Mexico and Tijuana will be migrated to Azure.
+* Allow Mexico and Tijuana offices to maintain their separation of billing.
+* Current compliance requirements must continue being met within Azure.
+* The Marketing department within to better understand the most popular features of BCApp.
+
+
+
+### Assessment Key technical requirements: 
+* Migrate Mexico workloads to Azure
+* Migrate Tijuana workloads to Azure
+* Migrate BCApp to Azure
+
+
+### Key non-technical requirements:
+* Establish a presence in Azure (with new subscriptions for Mexico office resource and Tijuana office resources)
+* Ensure Mexico and Tijuana are billed independently
+* Archive Activity Log (audit) information for 2 years
+
+## Solution
+###  Solution specifications:
+* Use 2 separate subscriptions to manage billing
+* Archive Activity Log to Storage with retention
+* Use Application Insights for BCApp
