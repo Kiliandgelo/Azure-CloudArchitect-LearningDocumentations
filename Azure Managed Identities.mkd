@@ -1,0 +1,150 @@
+# Managed Identities
+
+## Configuring Self-Service Password Reset
+To configure Self service password reset , you first determine who will be enabled to use self service password reset. From your existing Azure Tenant , on the Azure Portal using Azure Active Directory Password reset.
+
+
+In the password reset properties , there will be few options 
+
+
+The selected option is useful for creating specific groups who have self service password reset enabled.
+
+
+Azure Administrator accounts will always be able to reset their passwords no matter what that option is set to. 
+
+
+After enabling password reset for user and groups , you take of authentication methods required to reset a password and the number of authentication methods available of users
+
+
+At least one authentication method is required to reset a password , but it is a good idea to have additional methods available. You can choose from email notification, a text or code sent to users's mobile or office phone....
+
+
+## Manage Multiple Directories
+A tenant represents an organization in Azure Active Directory. It is a dedicated instance of Azure AD that an organization receives and owns when it signs up for a Microsoft cloud service like Azure or Office 365. To use a tenant , it must be associated with a subscription. The Basic steps are shown below: 
+
+
+Create the AD Instance -> Create an Admin for the Instance -> Have the Admin Associate the Subscription with the Instance
+
+
+In Azure Active Directory (Azure AD), each tenant is a fully independent resource. There is no parent-child relationship between tenants. This independence between tenants includes resource independence administrative independence, and synchronization independence. 
+
+
+## Creating Users and Groups
+In Azure AD, all users requiring access to resources must have a user account. A user account is an Azure AD user object that contains all the information required to authenticate and authorize the user during the sign-in-process and build the user's access token.
+
+
+For the user accounts, there are multiple different sources depending on the types of identity. 
+
+Types of Identities: 
+* Cloud identities : Users only exist in Azure AD
+* Directory-synchronized identities (Windows Server AD): Users through in to Azure through a sync activity using Azure AD Connect
+* Guest users (Azure Active Directory)
+
+
+A group helps organize users to make it easier to manage permissions. Groups can be easily added through the portal. There are 2 types of groups security groups and distribution groups. Type of Groups
+* Security Groups : Security-enabled and used to assign permissions and control access to various resources
+* Office 365
+
+
+## Manage Device Settings
+If our environment has an on-premises AD footprint and we also want to benefit from the capabilities provided by Azure AD, we can implement hybrid Azure AD joined devices. These are devices joined to our on-premises Active Directory and our Azure AD. 
+
+
+Registered , AD joined, and Hybrid Joined Devices
+* Registered Devices : Device Type (personal) -> Registration is manual and the Windows OS is Windows 10
+* AD joined : Device Type (Organization Owned) -> Registration is manual and Windows OS is Windows 10
+* Hybrid joined Devices : Device Type (Organization Owned) -> Registration is automatic and Windows OS is Windows 7,8,10
+
+
+## Performing Bulk Updates
+There are several ways you can use PowerShell to import data into your directory, but the most commenly us is with CSV file.
+
+
+Step for Using the CSV file: 
+* Step1 : Use Connect-AzureAD to create a PowerSHell connection to your directory
+* Step2: Choose a new Password Profile for the new users
+* Step3: Use Import CSV to import the CSV file
+* Step4: Loop through the users in the file constructing the user parameters required for each user
+* Step5: Use New-ADUser to create each user.
+
+
+## Managing Guest Users
+Guest users are external users with an email address outside of Azure AD
+
+
+Requirements for guest account 
+* Email address needs to be valid as the user will need to follow the instructions from the invitation email
+* We will need to use a role that allows us to create users in the tenant directory (Global Administrator)
+
+
+## Installing Azure AD Connect, Including Password Hash and Pass-Through Synchronization
+Azure AD Connect integration our on-premises directories with Azure Active Directory. This allows us to provide a common identity for our users for Office 365, Azure and SaaS applications integrated with Azure AD 
+
+
+AD DS (On-Premises)
+* Sync Services : This component is responsible for creating users, groups, and others
+* Health Monitor : Azure AD Connect Health can provide monitoring and gives a central location to view this activity.
+* AD FS : Federation is optional as Azure AD Connect and can be used to configure hybrids using an on-premises AD FS infrastructure.
+
+
+## Using Azure AD Connect to Configure Federation with On-premises AD DS
+AD Connect provides several sign-on methods, Password Synchronization, Pass-Through Authentication and Federation with AD-FS. These methods are used to synchronize user accounts, and optionally, passwords from on-premises Active Directory instance to a cloud based Azure AD instance. 
+
+
+## Managing Azure AD Connect
+These are the procedural tasks available to configure when have Azure AD Connect
+* Privacy Settings
+* View current configuration
+* Customize Synchronization Options
+* Configure Device Options
+* Refresh Directory Schema
+* Configure Mode
+* Change User Sign-in 
+* Manage Federation
+* Troubleshoot
+
+
+## Managing Password Sync and Password Writeback
+With password writeback, we can configure Azure Active Directory to write passwords back to our on-premises Active Directory. Password writeback removes the need to set up and manage a complicated on-premises self service password reset (SSPR) so it provides a convenient cloud based way for users to reset the on-premises passwords wherever they are.
+
+
+
+Steps to Enable Password Writeback
+* Step 1: Sign into Azure AD Connect server and start the Azure AD Connect configuration wizard
+* Step 2: On the Welcome page, select Configure
+* Step 3: On the Additional tasks page, select Customize synchronization options, and then select next
+* Step 4: On the Connect to Azure AD page, enter a global administrator credential and then select Next 
+* Step 5: On the Connect directories and Domain/OU filtering pages, select Next 
+* Step 6: On the Optional features page, select the box next to Password writeback and select Next
+
+
+## Configuring User Accounts for MFA, MFA Using Bulk Update, Fraud Alerts, Bypass Options, Trusted IPs, and Verification Methods
+For organizations that need to be compliant with industry standards, such as PCI DSS version3.2, MFA is a must-have capability to authenticate users. Beyond being compliant with industry standards, enforcing MFA to authenticate users and also help organizations mitigate credential theft attacks. MFA provides additional security by requiring a second form of authentication and delivers strong authentication through easy to use authentication methods.
+
+
+Authentication methods: 
+* Something you know (password)
+* Something you have (trusted device not easily duplicated , such as a phone)
+* Something you are (biometrics)
+
+
+MFA Bypass Options : 
+
+
+Trusted IPs is a feature to allow federated users or IP address ranges to bypass 2 step authentication
+
+
+The one-time bypass feature allows a user to authenticate a single time without performing 2 step verification. The bypass is temporary and expires a specified number of seconds
+
+
+Verification Methods:
+* A code provided in an email or text message 
+* A phone call or a notification code on their phone 
+* Answers to security questions
+
+
+To enable MFA, go to Users under Manage in Azure Active Directory and then the Multi-Factor Authentication option. From there you can select the user to modify and select Enable for MFA. We can also bulk enable groups of users via PowerShell or with a CSV file in the Azure Portal
+
+
+              Get-MsolUser -All | Foreach( Set-MsolUser-UserPrincipalName $_.UserPrincipalName -StrongAuthenticationRequirements $auth) 
+
