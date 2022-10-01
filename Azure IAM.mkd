@@ -1,0 +1,157 @@
+## Identify and Access Management (IAM)
+At the core of IAM within Azure (and other Microsoft services is Azure Active Directory (AD)
+
+## Azure Active Directory
+Azure Active Directory is a cloud-first identity and access management (IAM ) service. Azure AD is very similar in purpose to Microsoft's traditional IAM solution, Active Directory Azure AD supports a range of objects which are often used with other Azure AD services to support functionality such as access control , single sign-on ,etc... An Example of the types of resources and objects you will find in Azure AD are as follows: 
+* User accounts and credentials
+* Profile information (location, phone number, address...)
+* Security groups
+* Enterprise applications
+* Registered devices
+
+Some important facts about Azure AD are:
+* Several Microsoft services leverage Azure AD, including Azure and Microsoft Office 365
+* The Azure AD service exists outside of Azure
+* For an Azure subscription to leverage an Azure tenant , the 2 must be associated
+* A range of licenses are available for Azure AD, and these determine the functionality available.
+* Azure AD is different than Microsoft AD , through the 2 can be integrated using Azure AD Connect
+
+## Azure AD - Domain Names
+Each Azure AD tenant is created with an initial domain name of domainname.onmicrosoft.com. This domain name is critical to Azure AD, and is associated with objects such as users (example: jsmith@domainname.onmicrosoft.com)
+
+
+Important information about Azure AD domain names:
+* The initial domain name cannot be deleted or changed 
+* Azure AD tenants support custom domain names, which: Can be added through the Azure portal (Azure AD > CUstom domain names), Must be verified through DNS (either TXT or MX record types)
+
+## Azure AD Roles
+These are 3 main types of administrative/security roles for Azure. These include classic subscriptions administrator roles. Azure role-based access control (RBAC) roles, and Azure AD administrator roles
+
+
+Classic administrator roles:
+* Historical administrator: Roles which were originally used by Azure Service Manager
+* Account administrator: Can manage/create/cancel subscriptions and change service administrator
+* Service administrator: Can manage services within the Azure portal and co-administrators
+* Co-administrator: Same permissions as service admin, but cannot manage classic admin roles
+
+
+RBAC roles: 
+* Roles used to provide granular permissions to actual Azure resources
+* For more information , take a look at RBAC roles within the Access Control page
+
+
+
+Azure AD administrator roles:Roles for managing Azure AD itself (Azure AD tenant is separate to Azure)Includes a number of admin roles such as global, application, billing, etc...Global admin provides full/access to Azure AD and is typically required to enabling features 
+
+## Device Management - Overview
+Azure AD provides the foundation for the ability to manage devices from the cloud. This capability ranges from simple device registration on through to full mobile device and application management (MDM/MAM)
+
+
+
+Device registration , restrictions, and other settings can be found within the Azure AD settings
+* Navigate to Azure AD > Devices > Device Settings and select whether devices may be registered 
+
+
+
+There are 3 main methods for registering devices with Azure AD:
+
+
+
+Azure AD registered devices: 
+* Typically used for personal devices not owned by the organization (bring your own device: BYOD)
+* Registers the object in Azure AD, providing an identity for the device
+* Supports access to an organization's Azure AD controlled resources
+
+
+
+Azure AD joined devices: 
+* Typically used for devices that are owned by an organization which does not use on-prem AD
+* Changes the local state of the device so that Azure AD logins can be used to log into the device
+* Provides access to single sign-on to Azure AD managed resources, enterprise state roam (ESR), restriction of access based on device compliance, and other benefits
+
+
+
+Hybrid Azure AD joined devices:
+* Typically used when an organization already uses, and has devices joined to, on-prem AD
+* Supports features of Azure AD join such as single sign-on and ESR
+
+## Device Management - Enterprise State Roam (ESR)
+Enterprise State Roam (ESR) is an Azure AD features which provides the ability to synchronize user and application settings data to the cloud. This providers users with a unified experience across their Windows devices, settings configured on one Azure AD managed device will be the same on others.
+
+
+
+Important information about Azure AD enterprise State Roam:
+
+
+
+ESR can be enabled through the Azure Portal (Azure AD > Devices > Enterprise State Roaming)
+
+
+
+Data to ESR is :
+* Hosted in one or more Azure regions aligned to the country/region of the Azure AD tenant
+* Retained 90 to 180 days after explicit deletion (if the user or directory is deleted )
+
+## Self Service Password Reset (SSPR)
+Self Service Password Reset (SSPR) is an Azure AD feature which gives end users the ability to reset their password without having to contact an Azure AD administrator. End-users can enroll in SSPR and use a range of authentication methods to verify their identity and reset their password
+
+
+
+Important information about SSPR:
+* SSPR is enabled within the Azure AD settings for your tenant: Navigate to Azure AD > Password Reset , Properties---- Configure SSPR to be enabled for None, Selected (groups) or All
+* Communication is an important step of enabling SSPR, as users must complete a registration process.
+* There are a range of important links which can be accessed by users: Azure AD password reset registration portal, Azure AD password reset portal, Azure AD password change portal 
+* Available authentication methods include: Password, Security Questions (including predefined and custom questions), Email address, Microsoft Authenticator app (preview) , OATH Hardware token, SMS or voice-call
+
+## Azure AD Identity Protection - Overview
+Azure Active Directory (AD) Identity Protection is a service provided by Microsoft. It is used to intelligently identity risks and vulnerabilities affecting your Azure AD identities. Identity Protection is powered by adaptive machine learning which detects anomalies and suspicious incidents relating to identity.
+
+
+To enable Azure AD Identity Protection: 
+* You must have Azure AD Premium P2 Licensing
+* You must also create Azure AD Identity Protection, as a new resource
+
+
+
+A summary of Identity Protection capabilities is as follows: 
+* Detect vulnerabilities and risky accounts based on various patterns and heuristics
+* Policies which can be configured to: Mitigate risky sign-ins by blocking sign-ins entirely or requiring multi-factor authentication , Block or secure risky user accounts , Require users to register for multi-factor authentication
+
+
+
+Policies within Identity Protection: 
+
+
+
+It is possible to configure policies within Identity Protection itself, and/or Conditional Access Policies. The policies within Identity Protection which can be configured are as follows: 
+* Multi-factor authentication (MFA) registration policy: Policy for enforcing user MFA registration, Allows more granular control over registration compared to standard Azure MFA settings
+* User risk policy: Policies applying to accounts which Identity Protection has identified as being at risk, Allows or denies access based on risk level, and can enforce a password change
+* Sign-in risk policy: Policies get applied in real-time, during sign-in, and can therefore be used to prevent sign-in. ----- They allow or deny access based on risk level, and can enforce the use of MFA ----- These apply to browser and modern-auth traffic, but not apps which use older security protocols.
+
+## Azure AD Identity Protection - Risk Events
+At the heart of Azure AD Identity Protection is the evaluation and identification of risk events. For Example, Azure AD might consider a sign-in risky if it is coming from a country where the user ordinarily does not sign-in from. 
+
+
+Below are a list of the risk events currently detected: 
+* Users with leaked credentials
+* Sign-ins from anonymous IP addresses
+* Impossible travel to atypical locations (like a sign-in from India, then another in 5 minutes from America)
+* Sign-ins from infected devices
+* Sign-ins from IP addresses with suspicious activity
+* Sign-ins from unfamiliar locations
+
+
+
+Each of these risk events has an associated risk level (high, medium, or low) which can be used for reporting purposes or within Conditional Access Policies to mitigate risk 
+
+## Azure AD Identity Protection - Vulnerabilities
+Azure AD Identity Protection evaluates your environment for any vulnerabilities which may be exploited by an attacker. These vulnerabilities are then reported for your investigation and remediation. 
+
+
+Below is a summary of the vulnerabilities which can be reported by Identity Protection: 
+* Multi-Factor authentication registration not configured 
+* Unmanaged Cloud apps (requires Cloud Discovery to be deployed)
+* Security Alerts identified through the Azure AD Privileged Management service (if enabled)
+
+## Azure Multi-Factor Authentication (MFA)
+Microsoft provides a fully-managed multi-Factor authentication (MFA) solution, which is a feature of Azure AD. 
